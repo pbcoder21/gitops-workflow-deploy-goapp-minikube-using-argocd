@@ -1,1 +1,1 @@
-# gitops-workflow-deploy-goapp-minikube-using-argocd
+# Gitops-workflow-deploy-goapp-minikube-using-argocd
