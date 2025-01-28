@@ -1,8 +1,14 @@
 # Use a lightweight base image
 FROM golang:1.21 as builder
 
-# Set the working directory
-WORKDIR /app
+# Set the GOPATH
+ENV GOPATH=/go
+
+# Disable Go modules
+ENV GO111MODULE=off
+
+# Set the working directory to GOPATH/src
+WORKDIR /go/src/app
 
 # Copy your Go source code to the container
 COPY . .
@@ -17,10 +23,11 @@ FROM alpine:latest
 WORKDIR /app
 
 # Copy the binary from the builder stage
-COPY --from=builder /app/server .
+COPY --from=builder /go/src/app/server .
 
 # Expose the port your application will run on
 EXPOSE 8081
 
 # Start your Go application
 CMD ["./server"]
+
